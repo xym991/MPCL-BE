@@ -5,6 +5,15 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "your_jwt_secret"; // Replace with your actual secret
 
+router.get("/commitee-members", (req, res) => {
+  People.getCommiteeMembers((err, results) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.status(200).json(results);
+  });
+});
+
 router.get("/me", (req, res) => {
   console.log("req.cookies.token", req.cookies.token);
   const token = req.cookies.token;
@@ -324,14 +333,6 @@ router.delete("/:id", (req, res) => {
  *       500:
  *         description: Server error
  */
-router.get("/commitee-members", (req, res) => {
-  People.getCommiteeMembers((err, results) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.status(200).json(results);
-  });
-});
 
 /**
  * @swagger

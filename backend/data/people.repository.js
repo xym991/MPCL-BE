@@ -112,7 +112,7 @@ class People {
 
   static getCommiteeMembers(callback) {
     const query = `
-      SELECT id, fname, lname, email, phone, role, image
+      SELECT id, fname, lname, email, phone, role, image, league_position
       FROM people
       WHERE role IN ('league_official', 'league_registrar')`;
 
