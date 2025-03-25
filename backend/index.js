@@ -10,11 +10,10 @@ require("dotenv").config();
 
 app.use(express.json({ limit: "50mb" }));
 
-const allowedOrigins = [process.env.FRONTEND, process.env.MANAGEMENT];
-console.log(allowedOrigins);
+// Allow all origins
 app.use(
   cors({
-    origin: ["*"],
+    origin: "*",
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true,
