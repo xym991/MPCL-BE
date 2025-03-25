@@ -386,7 +386,13 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1h" });
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true, // Prevents access via JavaScript
+      secure: true, // Required for HTTPS
+      sameSite: "None", // Allows cross-origin requests
+      domain: ".onrender.com", // Allows subdomains if needed
+      path: "/", // Ensure cookie is valid for all routes
+    });
     res.status(200).json({ message: "Login successful" });
   } catch (error) {
     res.status(500).send(error);
