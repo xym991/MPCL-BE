@@ -385,12 +385,11 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Incorrect password" });
     }
 
-    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id }, JWT_SECRET);
     res.cookie("token", token, {
       httpOnly: true, // Prevents access via JavaScript
       secure: true, // Required for HTTPS
-      sameSite: "None", // Allows cross-origin requests
-      domain: ".onrender.com", // Allows subdomains if needed
+      sameSite: "None", // Allows cross-origin requestss if needed
       path: "/", // Ensure cookie is valid for all routes
     });
     res.status(200).json({ message: "Login successful" });
