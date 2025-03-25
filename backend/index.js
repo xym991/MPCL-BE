@@ -13,7 +13,7 @@ app.use(express.json({ limit: "50mb" }));
 // Allow all origins
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.ORIGIN,
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true,
